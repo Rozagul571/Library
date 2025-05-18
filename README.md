@@ -7,14 +7,8 @@ Admin: username: rozagul, password: 1234, role: admin
 Operator: username: operator, password: operator1, role: operator
 User: username: Nodirbekova, password: Nodirbekova, role: user
 
-Setup Instructions
 
-Clone the Repository:
-git clone <repository-url>
-cd library-api
-
-
-Setup Docker:
+Docker
 
 Ensure Docker and Docker Compose are installed.
 Run the following command to start the application:docker-compose up --build
