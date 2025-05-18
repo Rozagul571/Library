@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     volumes:
@@ -10,6 +12,39 @@ services:
       - db_data:/app/db
     environment:
       - PYTHONUNBUFFERED=1
+      - DJANGO_DEBUG=True
+    command: python manage.py migrate && python manage.py runserver 0.0.0.0:8080
+    depends_on:
+      - redis
+    networks:
+      - library-network
+
+  redis:
+    image: redis:7.0-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - library-network
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: celery -A config worker --loglevel=info
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DJANGO_DEBUG=True
+    depends_on:
+      - app
+      - redis
+    networks:
+      - library-network
 
 volumes:
   db_data:
+
+networks:
+  library-network:
+    driver: bridge

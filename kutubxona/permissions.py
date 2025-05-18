@@ -1,5 +1,5 @@
 from rest_framework import permissions
-from kutubxona.models import User
+from .models import User
 
 class IsAdmin(permissions.BasePermission):
     def has_permission(self, request, view):

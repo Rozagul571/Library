@@ -11,10 +11,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 class UserSignupSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = 'username', 'password'
-        extra_kwargs = {
-            'password': {'write_only': True}
-        }
+        fields = ['username', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         user = User.objects.create_user(
@@ -27,51 +25,42 @@ class UserSignupSerializer(serializers.ModelSerializer):
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = 'username', 'password', 'role'
-        extra_kwargs = {
-            'password': {'write_only': True},
-            'role': {'required': True}
-        }
-
-    def validate_role(self, value):
-        if value not in [User.Roles.ADMIN, User.Roles.OPERATOR, User.Roles.USER]:
-            raise serializers.ValidationError("Invalid role")
-        return value
+        fields = ['username', 'password', 'role']
+        extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         user = User.objects.create_user(
             username=validated_data['username'],
             password=validated_data['password'],
-            role=validated_data['role']
+            role=validated_data['role'],
+            is_staff=validated_data['role'] == User.Roles.ADMIN,
+            is_superuser=validated_data['role'] == User.Roles.ADMIN
         )
         return user
 
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = 'id', 'title', 'daily_price'
-        extra_kwargs = {
-            'id': {'read_only': True}
-        }
+        fields = ['id', 'title', 'daily_price', 'created_at']
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = 'id', 'user', 'book', 'reserve_time', 'taken_time', 'return_time', 'fine', 'status'
+        fields = ['id', 'user', 'book', 'status', 'reserve_time', 'taken_time', 'return_time', 'fine']
         extra_kwargs = {
             'id': {'read_only': True},
             'user': {'read_only': True},
+            'status': {'read_only': True},
             'reserve_time': {'read_only': True},
             'taken_time': {'read_only': True},
             'return_time': {'read_only': True},
-            'fine': {'read_only': True},
-            'status': {'read_only': True}
+            'fine': {'read_only': True}
         }
 
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
-        fields = 'id', 'user', 'book', 'score'
+        fields = ['id', 'user', 'book', 'score', 'created_at']
         extra_kwargs = {
             'id': {'read_only': True},
             'user': {'read_only': True}

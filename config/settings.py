@@ -50,6 +50,19 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+
+CELERY_BEAT_SCHEDULE = {
+    'cancel-expired-orders-every-minute': {
+        'task': 'kutubxona.tasks.cancel_expired_orders',
+        'schedule': 60.0,  
+    },
+}
 
 AUTH_USER_MODEL = 'kutubxona.User'
 MIDDLEWARE = [

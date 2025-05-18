@@ -29,6 +29,7 @@ API Endpoints\
 Authentication\
 
 POST /api/v1/token/: \
+
 '{"username": "rozagul", "password": "1234"}'\
 
 
