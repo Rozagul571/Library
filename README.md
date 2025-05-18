@@ -5,8 +5,10 @@ Default Users\
 The following default users are created during migration:\
 
 
-Admin: username: rozagul, password: 1234, role: admin\
+Admin: username: rozagul, password: 1234, role: admin.\  
+
 Operator: username: operator, password: operator1, role: operator\
+
 User: username: Nodirbekova, password: Nodirbekova, role: user\
 
 
