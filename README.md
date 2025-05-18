@@ -1,43 +1,47 @@
-Library Management API
-This is a REST API for managing a library system built with Django REST Framework (DRF) and SQLite database. It includes user management, book reservations, and rating functionalities.
-Default Users
-The following default users are created during migration:
+Library Management API \
+This is a REST API for managing a library system built with Django REST Framework (DRF) and SQLite database. It includes user management, book reservations, and rating functionalities.\
+Default Users\
 
-Admin: username: rozagul, password: 1234, role: admin
-Operator: username: operator, password: operator1, role: operator
-User: username: Nodirbekova, password: Nodirbekova, role: user
+The following default users are created during migration:\
 
 
-Docker
-
-Ensure Docker and Docker Compose are installed.
-Run the following command to start the application:docker-compose up --build
-
-
-The API will be available at http://127.0.0.1:8080/api/v1/.
+Admin: username: rozagul, password: 1234, role: admin\
+Operator: username: operator, password: operator1, role: operator\
+User: username: Nodirbekova, password: Nodirbekova, role: user\
 
 
-Run Migrations:Migrations are automatically applied via Docker Compose. Default users will be created.
+Docker\
+
+Ensure Docker and Docker Compose are installed.\
+Run the following command to start the application:docker-compose up --build\
 
 
-API Endpoints
-Authentication
-
-POST /api/v1/token/: Obtain a JWT token.curl -X POST 'http://127.0.0.1:8080/api/v1/token/' \
--H 'Content-Type: application/json' \
--d '{"username": "rozagul", "password": "123"}'
+The API will be available at http://127.0.0.1:8080/api/v1/.\
 
 
-POST /api/v1/token/refresh/: Refresh a JWT token.
+Run Migrations:Migrations are automatically applied via Docker Compose. Default users will be created.\
 
-User Management
+
+API Endpoints\
+
+Authentication\
+
+POST /api/v1/token/: \
+'{"username": "rozagul", "password": "1234"}'\
+
+
+POST /api/v1/token/refresh/: Refresh a JWT token.\
+
+User Management\
 
 POST /api/v1/users/signup/: Register a new user (role: user only, open to all).curl -X POST 'http://127.0.0.1:8080/api/v1/users/signup/' \
+
 -H 'Content-Type: application/json' \
--d '{"username": "newuser", "password": "pass123"}'
+-d '{"username": "newuser", "password": "pass123"}'\
 
 
 POST /api/v1/users/create/: Create a new user (admin only).curl -X POST 'http://127.0.0.1:8080/api/v1/users/create/' \
+
 -H 'Authorization: Bearer <admin_token>' \
 -H 'Content-Type: application/json' \
 -d '{"username": "newadmin", "password": "adminpass", "role": "admin"}'
