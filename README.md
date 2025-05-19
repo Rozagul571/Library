@@ -5,10 +5,11 @@ Birinchi marta kirganingizda quyidagi foydalanuvchilar avtomatik yaratiladi:
 
 Authentication (Kirish)
 
-Admin: \
+Admin: 
+username: rozagul \
 
-username: rozagul
 password: 1234
+
 role: admin
 
 
