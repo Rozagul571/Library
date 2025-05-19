@@ -4,7 +4,9 @@ Default Users (Standart Foydalanuvchilar)
 Birinchi marta kirganingizda quyidagi foydalanuvchilar avtomatik yaratiladi:
 
 Authentication (Kirish)
-Admin: 
+
+Admin: \
+
 username: rozagul
 password: 1234
 role: admin
@@ -60,7 +62,8 @@ Admin (rozagul) bilan sinash:
 Postman yoki terminalda yangi so‘rov yarating:
 Method: POST
 URL: http://127.0.0.1:8080/api/v1/token/
-Body (JSON formatida):{
+Body (JSON formatida):
+{
   "username": "rozagul",
   "password": "1234"
 }
